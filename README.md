@@ -63,3 +63,6 @@ To access the database directly:
 ```sh
 docker-compose exec db psql -U <user> -d <database>
 ```
+
+## My Process
+See [PROCESS.md](PROCESS.md) for an overview of my process building this out.
