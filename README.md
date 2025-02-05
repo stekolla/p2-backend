@@ -24,10 +24,12 @@ docker-compose up --build
 This will start the FastAPI backend and a PostgreSQL database container.
 
 ### 4. Access the API
-Once running, the API will be available at:
+Once running, the API will be available at http://localhost:8000/
 
 - Docs: http://localhost:8000/doc
 - Redoc: http://localhost:8000/redoc
+
+For more complex examples, see the `examples` folder.
 
 ## Other Tasks
 ### 1. Run Tests
@@ -36,27 +38,28 @@ To run unit tests inside the container:
 docker-compose exec api pytest
 ```
 
-### 2. Apply Migrations
-To apply any new database migrations:
+### 2. Seed the Database
+To seed the database with some fake data for local use:
 ```sh
-docker-compose exec api alembic upgrade head
+docker-compose exec api python app/database_seed.py
 ```
 
-### 3. Seed the Database
-```sh
-docker-compose exec api python tests/db_seed.py
-```
-
-### 4. Create a DB Migration
+### 3. Create a DB Migration
 To create a new DB migration:
 ```sh
 docker-compose exec api alembic revision --autogenerate -m "Your message here"
 ```
 
-Migrations will be applied automatically when the API container starts.
+Migrations will be applied automatically when the API container starts, or you can apply them manually after creating them.
+
+### 4. Apply Migrations
+To apply any new database migrations:
+```sh
+docker-compose exec api alembic upgrade head
+```
 
 ### 5. Access the Database
-To access the PostgreSQL database directly:
+To access the database directly:
 ```sh
 docker-compose exec db psql -U <user> -d <database>
 ```
